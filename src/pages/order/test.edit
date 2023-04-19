@@ -1,0 +1,31 @@
+let editingRowKey = null;
+let editingRowData = null;
+
+// 編輯行資料
+const editRow = (rowKey, row) => {
+  editingRowKey = rowKey;
+  editingRowData = { ...row };
+};
+
+// 儲存編輯結果
+const saveEdit = () => {
+  // 在這裡處理編輯完成後的資料保存操作
+  // 可以向後端發送請求，更新資料等
+
+  // 根據 editingRowKey 找到對應的行索引，並更新資料
+  const rowIndex = rows.value.findIndex(row => row.index === editingRowKey);
+  if (rowIndex >= 0) {
+    rows.value[rowIndex] = { ...editingRowData };
+  }
+
+  // 重置編輯相關的資料
+  editingRowKey = null;
+  editingRowData = null;
+};
+
+// 取消編輯
+const cancelEdit = () => {
+  // 重置編輯相關的資料
+  editingRowKey = null;
+  editingRowData = null;
+};
