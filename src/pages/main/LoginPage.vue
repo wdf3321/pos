@@ -50,14 +50,14 @@
 </template>
 
 <script setup>
-// import { useQuasar } from 'quasar'
+import { useQuasar } from 'quasar'
 import { reactive } from 'vue'
 import { useUserStore } from 'src/stores/user'
 // import { useRouter } from 'vue-router'
 import { api } from 'src/boot/axios'
 
 // const router = useRouter()
-// const $q = useQuasar()
+const $q = useQuasar()
 const user = useUserStore()
 const form = reactive({
   username: '',
@@ -77,11 +77,27 @@ const form = reactive({
 
 // const accept = ref(false)
 const login = async () => {
-  const result = await api.post('/login', form)
-  console.log(user.tokens)
+  try {
+    const result = await api.post('/login', form)
+    // console.log(user.tokens)
 
-  user.tokens = result.data.token
-  console.log(user.tokens)
+    user.tokens = result.data.token
+    // console.log(user.tokens)
+    $q.notify({
+      color: 'green-4',
+      textColor: 'white',
+      icon: 'cloud_done',
+      message: '登入成功'
+    })
+  } catch (error) {
+    console.log(error)
+    $q.notify({
+      color: 'red-4',
+      textColor: 'white',
+      icon: 'info',
+      message: error.message
+    })
+  }
 }
 // const login = async (form) => {
 //   console.log(form)
