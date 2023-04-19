@@ -9,7 +9,7 @@
         <q-input
           outlined
           type="text"
-          v-model="form.account"
+          v-model="form.username"
           label="帳號"
           hint="請輸入帳號"
           lazy-rules
@@ -32,7 +32,7 @@
             flat
             class="q-ml-sm"
           />
-          <q-btn label="送出" type="submit" color="primary" to="/index" />
+          <q-btn label="送出" color="primary" @click="login" />
 
         </div>
       </q-form>
@@ -54,12 +54,13 @@
 import { reactive } from 'vue'
 // import { useUserStore } from 'src/stores/user'
 // import { useRouter } from 'vue-router'
+import { api } from 'src/boot/axios'
 
 // const router = useRouter()
 // const $q = useQuasar()
 // const user = useUserStore()
 const form = reactive({
-  account: '',
+  username: '',
   password: ''
 })
 
@@ -75,9 +76,10 @@ const form = reactive({
 // }
 
 // const accept = ref(false)
-// const login = async () => {
-//   await user.login(form)
-// }
+const login = async () => {
+  const result = await api.post('/login', form)
+  console.log(result)
+}
 // const logout = async () => {
 //   await user.logout()
 // }
