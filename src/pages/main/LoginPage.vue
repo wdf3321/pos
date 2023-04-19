@@ -52,13 +52,13 @@
 <script setup>
 // import { useQuasar } from 'quasar'
 import { reactive } from 'vue'
-// import { useUserStore } from 'src/stores/user'
+import { useUserStore } from 'src/stores/user'
 // import { useRouter } from 'vue-router'
 import { api } from 'src/boot/axios'
 
 // const router = useRouter()
 // const $q = useQuasar()
-// const user = useUserStore()
+const user = useUserStore()
 const form = reactive({
   username: '',
   password: ''
@@ -78,8 +78,16 @@ const form = reactive({
 // const accept = ref(false)
 const login = async () => {
   const result = await api.post('/login', form)
-  console.log(result)
+  console.log(user.tokens)
+
+  user.tokens = result.data.token
+  console.log(user.tokens)
 }
+// const login = async (form) => {
+//   console.log(form)
+//   const result = await user.login()
+//   console.log(result)
+// }
 // const logout = async () => {
 //   await user.logout()
 // }
