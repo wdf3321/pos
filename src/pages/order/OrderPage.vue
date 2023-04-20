@@ -1413,7 +1413,6 @@ style="width: 130px;"
       style="width: 130px;"
       v-model="bangdong4Form.bangdong1Pig"
       label="培根"
-
     />
     <q-input
       outlined

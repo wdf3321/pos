@@ -17,6 +17,15 @@ const routes = [
         }
       },
       {
+        path: '/test',
+        component: () => import('src/pages/order/AsdPage.vue'),
+        meta: {
+          title: 'test',
+          login: false,
+          admin: false
+        }
+      },
+      {
         path: '/index',
         name: 'index',
         component: () => import('src/pages/main/IndexPage.vue'),
