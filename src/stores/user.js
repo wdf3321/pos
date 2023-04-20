@@ -14,8 +14,8 @@ export const useUserStore = defineStore(
     const $q = useQuasar()
     const login = async (form) => {
       try {
-        const { data } = await api.post('/login', form)
-        tokens.value = data.result.token
+        const data = await api.post('/login', form)
+        tokens.value = data.data.token
         $q.notify({
           color: 'green-4',
           textColor: 'white',
